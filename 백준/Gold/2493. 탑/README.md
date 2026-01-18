@@ -30,51 +30,7 @@
 
  <p>첫째 줄에 주어진 탑들의 순서대로 각각의 탑들에서 발사한 레이저 신호를 수신한 탑들의 번호를 하나의 빈칸을 사이에 두고 출력한다. 만약 레이저 신호를 수신하는 탑이 존재하지 않으면 0을 출력한다.</p>
 
-### 풀이
-```java
-import java.util.*;
-import java.io.*;
-public class Main {
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int n = Integer.parseInt(br.readLine());
-        
-        Stack<Integer> stack = new Stack<>();
-        StringTokenizer st = new StringTokenizer(br.readLine());
-        StringBuilder sb = new StringBuilder();
-        
-        int[] tops = new int[n];    
-                        
-        for(int i = 0; i < n; i++) {
-            tops[i] = Integer.parseInt(st.nextToken());
-        }
-        
-        stack.push(1);
-        sb.append("0 ");
-        
-        for(int i = 1; i < n; i++) {
-            
-            while(!stack.isEmpty()) {
-                
-                if(tops[stack.peek() - 1] > tops[i]) {
-                    sb.append(stack.peek()).append(" ");
-                    break;
-                }
-                
-                if(tops[stack.peek() - 1] < tops[i]) {
-                    stack.pop();
-                }
-                
-            }
-            if(stack.isEmpty()) {
-                sb.append("0 ");
-            }
-            stack.push(i+1);
-        }
-                
-        System.out.print(sb);
-        
-    }
-}
+
+
 
 ```
