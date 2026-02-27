@@ -1,30 +1,23 @@
 import java.util.*;
-
 class Solution {
     public String solution(int[] numbers) {
-        StringBuilder sb = new StringBuilder();
-        int n = numbers.length;
         List<String> list = new ArrayList<>();
-                
-        for(int i = 0; i < n; i++) {
-            list.add(String.valueOf(numbers[i]));   
+        
+        for(int i = 0; i < numbers.length; i++) {
+            list.add(String.valueOf(numbers[i]));
         }
         
         list.sort((a,b) -> {
             String case1 = a + b;
             String case2 = b + a;
-            return case2.compareTo(case1);                    
+            return case2.compareTo(case1);
         });
+        if(list.get(0).equals("0")) return "0";
+        StringBuilder sb = new StringBuilder();
         
-        String answer = "";
-        for(String num : list) {
-            sb.append(num);
-        }
-        
-        if(list.get(0).equals("0")) {
-            return "0";
+        for(String str : list) {
+            sb.append(str);
         }
         return sb.toString();
     }
 }
-
