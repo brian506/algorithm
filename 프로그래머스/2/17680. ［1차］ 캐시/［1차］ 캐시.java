@@ -1,37 +1,25 @@
 import java.util.*;
 class Solution {
     public int solution(int cacheSize, String[] cities) {
-        List<String> list = new ArrayList<>();
+        if(cacheSize == 0) {
+            return cities.length * 5;
+        }
         int totalTime = 0;
+        LinkedList<String> list = new LinkedList<>();
         
-        
-        for(int i = 0; i < cities.length; i++) {
-            String city = cities[i].toLowerCase();
-            boolean cached = false;
+        for(String city : cities) {
+            String lowerCity = city.toLowerCase();
             
-            
-           if(!list.isEmpty()) {
-            for(int j = 0; j < list.size(); j++) {
-                String cacheCity = list.get(j);
-                
-                if(cacheCity.equals(city)) {
-                    cached = true;      
-                    list.remove(j);
-                    break;
-                }                                                     
+            if(list.remove(lowerCity)) { // 캐시 히트
+                list.addLast(lowerCity);
+                totalTime += 1;
+            } else {
+                if(list.size() >= cacheSize) {
+                    list.removeFirst();
+                }
+                list.addLast(lowerCity);
+                totalTime += 5;
             }
-           }
-            if(cached) {
-                totalTime += 1;                
-            }  else {
-                totalTime += 5;                                   
-            }   
-            
-            list.add(city);
-            
-            if(list.size() > cacheSize) {
-               list.remove(0);           
-            } 
         }
         return totalTime;
     }
